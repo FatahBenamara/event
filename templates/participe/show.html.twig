@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participe{% endblock %}
+
+{% block body %}
+    <h1>Participe</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ participe.id }}</td>
+            </tr>
+            <tr>
+                <th>Date_at</th>
+                <td>{{ participe.dateAt ? participe.dateAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Date_fin</th>
+                <td>{{ participe.dateFin ? participe.dateFin|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('participe_index') }}">back to list</a>
+
+    <a href="{{ path('participe_edit', {'id': participe.id}) }}">edit</a>
+
+    {{ include('participe/_delete_form.html.twig') }}
+{% endblock %}

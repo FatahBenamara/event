@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Participe index{% endblock %}
+
+{% block body %}
+    <h1>Participe index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date_at</th>
+                <th>Date_fin</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for participe in participes %}
+            <tr>
+                <td>{{ participe.id }}</td>
+                <td>{{ participe.dateAt ? participe.dateAt|date('Y-m-d') : '' }}</td>
+                <td>{{ participe.dateFin ? participe.dateFin|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('participe_show', {'id': participe.id}) }}">show</a>
+                    <a href="{{ path('participe_edit', {'id': participe.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('participe_new') }}">Create new</a>
+{% endblock %}

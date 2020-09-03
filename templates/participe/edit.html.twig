@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Participe{% endblock %}
+
+{% block body %}
+    <h1>Edit Participe</h1>
+
+    {{ include('participe/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('participe_index') }}">back to list</a>
+
+    {{ include('participe/_delete_form.html.twig') }}
+{% endblock %}
