@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Réservation{% endblock %}
+
+{% block body %}
+
+<!-- form en methode POST -->
+    <form method="POST">
+        <div class="form-group">
+            <label for="">Events disponibles</label>
+            <select multiple class="form-control" name="events[]" required>
+                {% for event in eventsFinis %}
+                    <option value="{{ event.id }}">{{ event.nom ~ " - " ~ event.auteur }} </option>                    
+                 {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Participer</button>
+    </form>
+{% endblock %}

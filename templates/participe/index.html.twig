@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Participe index{% endblock %}
+{% block title %}Participation{% endblock %}
 
 {% block body %}
-    <h1>Participe index</h1>
+    <h1>Nous sommes {{participes|length}} participant(e)s</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Date_at</th>
-                <th>Date_fin</th>
+                <th>Prenom de l'abonné</th>
+                <th>évènement</th>
+                <th>Du</th>
+                <th>Au</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -18,8 +20,14 @@
         {% for participe in participes %}
             <tr>
                 <td>{{ participe.id }}</td>
-                <td>{{ participe.dateAt ? participe.dateAt|date('Y-m-d') : '' }}</td>
-                <td>{{ participe.dateFin ? participe.dateFin|date('Y-m-d') : '' }}</td>
+                <td>{{ participe.abonne.prenom }}</td>
+                <td>{{ participe.event.nom ~ " - " ~ participe.event.auteur }}</td>
+
+
+
+
+                <td>{{ participe.dateAt ? participe.dateAt|date('d/m/Y') : '' }}</td>
+                <td>{{ participe.dateFin ? participe.dateFin|date('d/m/Y') : '' }}</td>
                 <td>
                     <a href="{{ path('participe_show', {'id': participe.id}) }}">show</a>
                     <a href="{{ path('participe_edit', {'id': participe.id}) }}">edit</a>

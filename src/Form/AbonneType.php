@@ -4,8 +4,11 @@ namespace App\Form;
 
 use App\Entity\Abonne;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
 
 class AbonneType extends AbstractType
 {
@@ -13,8 +16,28 @@ class AbonneType extends AbstractType
     {
         $builder
             ->add('prenom')
-            ->add('roles')
-            ->add('password')
+
+            ->add('roles', ChoiceType::class, [
+                'choices' => [
+                    'Abonné' => 'ROLE_USER',
+                    'Admin' => 'ROLE_ADMIN',
+                    
+                ],
+                "required"  => true,
+                "multiple" => true,
+                "label" => "Rôles"
+
+            ])
+            
+            ->add('password', PasswordType::class, [
+                "mapped" => false,
+                "constraints" => [
+                    new Length([
+                        "min" => 6,
+                        "minMessage" => "Le mot de passe doit contenir au moins {{ limit }} caractères"
+                    ])
+                ]
+            ])
         ;
     }
 

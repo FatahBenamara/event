@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use App\Repository\ParticipeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,15 +19,32 @@ class EventController extends AbstractController
     /**
      * @Route("/", name="event_index", methods={"GET"})
      */
-    public function index(EventRepository $eventRepository): Response
+    public function index(EventRepository $eventRepository, ParticipeRepository $pr): Response
     {
+
+
+
+
+
+
         return $this->render('event/index.html.twig', [
             'events' => $eventRepository->findAll(),
+            
+
         ]);
     }
 
+
+
+
+
+
+
+
+
+
     /**
-     * @Route("/new", name="event_new", methods={"GET","POST"})
+     * @Route("/nouveau", name="event_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -59,7 +77,7 @@ class EventController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="event_edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier", name="event_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Event $event): Response
     {

@@ -19,6 +19,24 @@ class ParticipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Participe::class);
     }
 
+
+    public function findByNonFinis()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.date_fin IS NULL')
+            
+            ->orderBy('p.date_at', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+
+
+
+
     // /**
     //  * @return Participe[] Returns an array of Participe objects
     //  */

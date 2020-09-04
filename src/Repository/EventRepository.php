@@ -47,4 +47,17 @@ class EventRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findBySearch($mot){
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.auteur LIKE :val OR e.nom LIKE :val')
+            ->setParameter('val', '%' . $mot . '%')
+            ->orderBy('e.auteur', 'ASC')
+            ->addOrderBy('e.nom', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    
 }

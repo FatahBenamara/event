@@ -26,7 +26,7 @@ class ParticipeController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="participe_new", methods={"GET","POST"})
+     * @Route("/nouveau", name="participe_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -59,7 +59,7 @@ class ParticipeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="participe_edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier", name="participe_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Participe $participe): Response
     {

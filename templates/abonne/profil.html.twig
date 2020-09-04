@@ -1,0 +1,56 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Profil abonné{% endblock %}
+
+{% block body %}
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Prénom : {{ app.user.username }}</h4>
+            </div>
+        </div>
+
+        <div>
+            <a href="{{ path("reserver") }}">Participer à un event</a>
+            <!-- <a href="#">
+                <i class="fa fa-plus"></i>
+                Ajouter un évenement
+            </a> -->
+        </div>
+    
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                
+                    <th>Participé </th>
+    
+                    <!-- <th> Du</th>
+                    <th> Au</th> -->
+                    
+                </tr>
+            </thead>
+            <tbody>
+            {% for participe in app.user.participes %}
+                <tr>
+                  
+                    <td>{{ participe.event.nom ~ " - " ~ participe.event.auteur }}</td>
+    {#
+                    <td>{{ participe.dateAt ? participe.dateAt|date('Y-m-d') : '' }}</td>
+                    <td>{{ participe.dateFin ? participe.dateFin|date('Y-m-d') : '' }}</td>#}
+                
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Vous n'avez participé a aucun évènement !</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    
+        
+
+    
+
+
+
+{% endblock %}
