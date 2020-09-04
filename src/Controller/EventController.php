@@ -35,14 +35,6 @@ class EventController extends AbstractController
     }
 
 
-
-
-
-
-
-
-
-
     /**
      * @Route("/nouveau", name="event_new", methods={"GET","POST"})
      */
@@ -109,4 +101,29 @@ class EventController extends AbstractController
 
         return $this->redirectToRoute('event_index');
     }
+
+
+
+    /**
+     * @Route("s/{id}", name="event_afficher", methods={"GET"})
+     */
+    public function afficher(Event $event): Response
+    {
+        return $this->render('event/show.html.twig', [
+            'event' => $event,
+        ]);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

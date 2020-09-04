@@ -13,6 +13,19 @@
     {% block nav %}{% include "menu.html.twig" %}{% endblock %}
     
     <div class="container">
+
+        {% for type, messages in app.flashes %}
+            <div class="alert alert-{{ type }}">
+                {% for message in messages %}
+                    {{ message|raw }}
+                {% endfor %}
+            </div>
+        {% endfor %} 
+
+
+
+
+
         {% block body %}
         <h1>Bienvenue à nos évènements</h1>
         <div>

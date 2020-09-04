@@ -1,6 +1,6 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Profil abonné{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block body %}
 
@@ -12,17 +12,17 @@
 
         <div>
             <a href="{{ path("reserver") }}">Participer à un event</a>
-            <!-- <a href="#">
+            <a href="{{path("event_ajouter") }}">
                 <i class="fa fa-plus"></i>
                 Ajouter un évenement
-            </a> -->
+            </a> 
         </div>
     
         <table class="table">
             <thead class="thead-dark">
                 <tr>
                 
-                    <th>Participé </th>
+                    <th>Je participe: </th>
     
                     <!-- <th> Du</th>
                     <th> Au</th> -->

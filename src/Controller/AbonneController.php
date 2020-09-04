@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Abonne;
+use App\Entity\Event;
 use App\Form\AbonneType;
 use App\Entity\Participe;
+use App\Form\FormEventType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\EventRepository;
@@ -159,11 +161,53 @@ class AbonneController extends AbstractController
 
 
 
+    /**
+     * @Route("/profil/ajouter-event", name="event_ajouter", methods={"GET", "POST"})
+     */
+    public function ajouter(EventRepository $er, EntityManagerInterface $em, Request $rq){
+            $nouveauEvent = new Event;
+            
+            $formAjouter = $this->createForm(FormEventType::class, $nouveauEvent); 
+            $formAjouter->handleRequest($rq);
+
+
+
+        if ($formAjouter->isSubmitted()) {
+        
+            if ($formAjouter->isValid()){
+
+                $fichier = $formAjouter->get("couverture")->getData();
+                if($fichier){
+                    $nomFichier = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
+                    $nomFichier .= uniqid();
+                    $nomFichier .= "." . $fichier->getExtension();
+                    $nomFichier = str_replace(" ", "_", $nomFichier);
+                    // on enregistre le fichier téléchargé dans le dossier images
+                    $fichier->move($this->getParameter("dossier_images"), $nomFichier);
+                    $nouveauEvent->setCouverture($nomFichier);
+                }
 
 
 
 
 
+            $em->persist($nouveauEvent);
+            $em->flush();
+            $this->addFlash("success", "Nouveau event : <i>" . $nouveauEvent->getNom() .  "</i> ajouté");
+
+            return $this->redirectToRoute("accueil");
+            }
+            else {
+                $this->addFlash("danger", "Le formulaire n'est pas valide");
+            }
+        
+        }
+
+            
+            $formAjouter = $formAjouter->createView();
+            return $this->render("event/form_ajouter.html.twig", compact("formAjouter"));
+    }
+ 
 
 
 
